@@ -1,0 +1,1646 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>英雄联盟 PBE 指南框架</title>
+  <style>
+    @font-face {
+      font-family: "FZCang";
+      src: url("assets/official/FZCANGYHJW.ttf") format("truetype");
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "SellNum";
+      src: url("assets/official/sellnum-1.woff") format("woff");
+      font-display: swap;
+    }
+
+    :root {
+      --asset: "assets/official/";
+      --gold: #fff0b7;
+      --deep-gold: #dca748;
+      --orange: #db581e;
+      --burnt: #6a250b;
+      --ink: #070503;
+      --paper: #efe2b5;
+      --muted: #91877b;
+      --white: #fff;
+      --header-height: 0px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: #000;
+    }
+
+    body {
+      margin: 0;
+      min-width: 1180px;
+      color: var(--gold);
+      background: #000;
+      font-family: "FZCang", "Microsoft YaHei", "SimHei", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .wrapper {
+      width: 100%;
+      margin-top: 0;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    .section {
+      width: 100%;
+      min-height: 920px;
+      margin: -1px auto 0;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      scroll-margin-top: var(--header-height);
+    }
+
+    .part-nav {
+      width: 210px;
+      height: 408px;
+      background: url("assets/official/part_nav_bg.png") no-repeat right center / 3px;
+      position: fixed;
+      top: 50%;
+      right: 0;
+      z-index: 14;
+      transform: translate(18px, -50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .part-nav.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(-50%);
+    }
+
+    .part-nav a {
+      width: 100%;
+      height: 102px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 30px;
+      position: relative;
+      color: #8a8582;
+      font-size: 20px;
+      line-height: 1.1;
+      text-align: right;
+      transition: color 0.18s ease, font-size 0.18s ease;
+    }
+
+    .part-nav a::after {
+      content: "";
+      display: none;
+      width: 15px;
+      height: 30px;
+      background: url("assets/official/part_nav_on.png") no-repeat center top / 100%;
+      position: absolute;
+      top: 50%;
+      right: 3px;
+      transform: translateY(-50%);
+    }
+
+    .part-nav a.on,
+    .part-nav a:hover {
+      color: var(--orange);
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .part-nav a.on::after {
+      display: block;
+    }
+
+    .section0 {
+      min-height: calc(100vh - var(--header-height));
+      height: 1560px;
+      background: url("assets/official/bg0.jpg") no-repeat center top / cover;
+    }
+
+    .bg-parallax-content {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      z-index: -1;
+    }
+
+    .parallax-mask {
+      width: 2560px;
+      height: 1231px;
+      background: url("assets/official/parallax-mask.png") no-repeat center / 100%;
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      margin-left: -1280px;
+    }
+
+    .parallax-bg1,
+    .parallax-bg2,
+    .parallax-bg3,
+    .parallax-bg4,
+    .parallax-bg5,
+    .parallax-bg6,
+    .parallax-bg7,
+    .parallax-line1,
+    .parallax-line2,
+    .parallax-line3,
+    .parallax-line4 {
+      position: absolute;
+      will-change: transform;
+      transition: transform 0.3s ease-out;
+    }
+
+    .parallax-bg1 {
+      width: 2838px;
+      height: 1297px;
+      top: -8px;
+      left: -126px;
+      background: url("assets/official/parallax-bg1.png") no-repeat center / 100%;
+    }
+
+    .parallax-bg2 {
+      width: 1006px;
+      height: 748px;
+      top: -6px;
+      left: 50%;
+      margin-left: -766px;
+      background: url("assets/official/parallax-bg2.png") no-repeat center top / 100%;
+    }
+
+    .parallax-bg3 {
+      width: 2926px;
+      height: 1440px;
+      top: -6px;
+      left: -376px;
+      background: url("assets/official/parallax-bg3.png") no-repeat center top / 100%;
+    }
+
+    .parallax-bg4 {
+      width: 2601px;
+      height: 1102px;
+      top: -6px;
+      left: 28px;
+      background: url("assets/official/parallax-bg4.png") no-repeat center top / 100%;
+    }
+
+    .parallax-bg5 {
+      width: 1398px;
+      height: 833px;
+      top: 354px;
+      left: 230px;
+      background: url("assets/official/parallax-bg5.png") no-repeat center top / 100%;
+    }
+
+    .parallax-bg6 {
+      width: 1324px;
+      height: 1052px;
+      bottom: -15px;
+      left: 50%;
+      margin-left: -588px;
+      background: url("assets/official/parallax-bg6.png") no-repeat center top / 100%;
+    }
+
+    .parallax-bg7 {
+      width: 902px;
+      height: 1054px;
+      bottom: -15px;
+      right: -224px;
+      background: url("assets/official/parallax-bg7.png") no-repeat center top / 100%;
+    }
+
+    .parallax-line1 {
+      width: 1093px;
+      height: 533px;
+      top: 0;
+      left: 50%;
+      margin-left: -397px;
+      background: url("assets/official/parallax-line1.png") no-repeat center top / 100%;
+    }
+
+    .parallax-line2 {
+      width: 1616px;
+      height: 816px;
+      top: 624px;
+      right: -6px;
+      background: url("assets/official/parallax-line2.png") no-repeat center top / 100%;
+    }
+
+    .parallax-line3 {
+      width: 1616px;
+      height: 1288px;
+      bottom: -14px;
+      left: -9px;
+      background: url("assets/official/parallax-line3.png") no-repeat center top / 100%;
+    }
+
+    .parallax-line4 {
+      width: 994px;
+      height: 1440px;
+      bottom: -14px;
+      left: -13px;
+      background: url("assets/official/parallax-line4.png") no-repeat center top / 100%;
+    }
+
+    .lol-logo {
+      width: 285px;
+      height: 134px;
+      background: url("assets/official/lol-logo.png") no-repeat center top / 100%;
+      position: absolute;
+      top: 65px;
+      left: 55px;
+      z-index: 3;
+    }
+
+    .hero-copy {
+      position: absolute;
+      left: 88px;
+      top: 632px;
+      z-index: 4;
+      max-width: 1020px;
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      color: #f6d685;
+      font-size: 31px;
+      letter-spacing: 6px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-kicker::before,
+    .hero-kicker::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: var(--deep-gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 0 4px rgba(107, 60, 13, 0.18);
+    }
+
+    .hero-title {
+      margin: 0;
+      color: #fff6c9;
+      font-size: clamp(72px, 6vw, 118px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      text-shadow:
+        0 4px 0 #6c3a11,
+        0 10px 18px rgba(0, 0, 0, 0.58),
+        0 0 28px rgba(245, 197, 102, 0.25);
+    }
+
+    .hero-subtitle {
+      margin: 22px 0 0;
+      color: #ffe4a2;
+      font-size: 32px;
+      letter-spacing: 7px;
+      text-shadow: 0 2px 9px #000;
+    }
+
+    .hero-panel {
+      width: 652px;
+      position: absolute;
+      right: 108px;
+      top: 370px;
+      z-index: 5;
+    }
+
+    .kv-count-down {
+      width: 560px;
+      height: 278px;
+      margin: 0 auto 18px;
+      background: url("assets/official/kv_count_down.png") no-repeat center top / 100%;
+      text-align: center;
+    }
+
+    .count-text1 {
+      margin: 0;
+      padding-top: 3px;
+      color: #ffedb9;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .count-text2 {
+      margin: -16px 0 0 16px;
+      color: #e6d15f;
+      font-size: 31px;
+      line-height: 1;
+    }
+
+    .count-text2 span {
+      display: inline-block;
+      font-family: "SellNum", "FZCang", serif;
+      font-size: 214px;
+      color: #fff3c5;
+      line-height: 1;
+      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+    }
+
+    .kv-btns-box {
+      width: 652px;
+      height: 210px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .btn-order-now,
+    .btn-check-dangan,
+    .btn-download,
+    .panel-button {
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .btn-order-now:hover,
+    .btn-check-dangan:hover,
+    .btn-download:hover,
+    .panel-button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .btn-order-now {
+      display: block;
+      width: 651px;
+      height: 116px;
+      margin: 0 auto 16px;
+      background: url("assets/official/btn_order_now.png") no-repeat 0 0 / 100% 100%;
+      color: #fff;
+      font-size: 50px;
+      line-height: 116px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 9px;
+    }
+
+    .btn-check-dangan {
+      display: block;
+      width: 650px;
+      height: 72px;
+      background:
+        linear-gradient(180deg, rgba(31, 91, 142, 0.96), rgba(14, 54, 101, 0.96)),
+        linear-gradient(90deg, rgba(255, 238, 166, 0.18), rgba(255, 238, 166, 0));
+      border: 2px solid #2d7ac4;
+      box-shadow:
+        inset 0 0 0 1px rgba(172, 219, 255, 0.25),
+        0 0 22px rgba(32, 119, 217, 0.28);
+      position: relative;
+      padding-left: 74px;
+      color: #ffefbf;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 22px;
+      line-height: 72px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+    }
+
+    .dangan-icon {
+      display: inline-block;
+      width: 82px;
+      height: 88px;
+      background: url("assets/official/dangan-icon.png") no-repeat center / 100%;
+      position: absolute;
+      left: 7px;
+      top: -1px;
+    }
+
+    .dangan-icon::after {
+      content: "";
+      width: 19px;
+      height: 19px;
+      background: url("assets/official/dangan-point.png") no-repeat center / 100%;
+      position: absolute;
+      top: -7px;
+      right: -3px;
+    }
+
+    .btn-download {
+      display: block;
+      width: 139px;
+      height: 210px;
+      background: url("assets/official/btn_download.png") no-repeat 0 0 / 100% 100%;
+      padding-top: 100px;
+      color: #fff;
+      font-size: 29px;
+      line-height: 38px;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: -158px;
+    }
+
+    .btn-download:hover {
+      background-image: url("assets/official/btn_download_hover.png");
+    }
+
+    .kv-bline {
+      width: 2560px;
+      height: 37px;
+      background: url("assets/official/kv_bline.png") no-repeat 0 0 / 100% 100%;
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      margin-left: -1280px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .pbe-download-detail {
+      width: min(1720px, calc(100vw - 220px));
+      min-height: 330px;
+      padding: 34px 38px;
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      gap: 38px;
+      position: absolute;
+      left: 50%;
+      top: 1088px;
+      z-index: 5;
+      transform: translateX(-50%);
+      border: 1px solid rgba(241, 181, 77, 0.42);
+      background:
+        linear-gradient(90deg, rgba(28, 13, 8, 0.92), rgba(20, 11, 8, 0.78)),
+        url("assets/official/p3-text-box.png") no-repeat center / 100% 100%;
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
+      scroll-margin-top: calc(var(--header-height) + 18px);
+    }
+
+    .pbe-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .pbe-copy h2 {
+      margin: 0 0 18px;
+      color: #fff2bd;
+      font-size: 46px;
+      line-height: 1.1;
+      text-shadow: 0 3px 0 #52220a, 0 9px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    .pbe-copy p {
+      margin: 0;
+      color: #ead5a5;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 21px;
+      line-height: 1.65;
+    }
+
+    .pbe-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pbe-steps li {
+      min-height: 86px;
+      padding: 17px 14px 14px;
+      border: 1px solid rgba(239, 226, 181, 0.24);
+      background: rgba(0, 0, 0, 0.34);
+      color: #fff7d1;
+      font-size: 19px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .pbe-steps b {
+      display: block;
+      margin-bottom: 8px;
+      color: #ff6c1c;
+      font-family: "SellNum", "FZCang", serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .path-warning {
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-left: 4px solid #ff6c1c;
+      background: rgba(219, 88, 30, 0.18);
+      color: #fff2bd;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .pbe-screens {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .pbe-screen-card {
+      margin: 0;
+      min-width: 0;
+      position: relative;
+    }
+
+    .pbe-screen-frame {
+      width: 100%;
+      aspect-ratio: 1.62 / 1;
+      overflow: hidden;
+      border: 1px solid rgba(255, 220, 143, 0.36);
+      background: #090612;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+    }
+
+    .pbe-screen-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .pbe-screen-card figcaption {
+      margin-top: 12px;
+      color: #f2d58c;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 18px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .section-account {
+      min-height: 1080px;
+      background: url("assets/official/bg9.jpg") no-repeat center top / cover;
+      color: #050505;
+    }
+
+    .module-inner {
+      width: min(1920px, 100%);
+      min-height: inherit;
+      margin: 0 auto;
+      padding: 86px 80px 80px;
+      position: relative;
+    }
+
+    .module-title {
+      margin: 0 auto 24px;
+      text-align: center;
+      color: #15110b;
+      font-size: 74px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 0 #f8df97;
+    }
+
+    .module-title.light {
+      color: #fff2bd;
+      text-shadow: 0 3px 0 #52220a, 0 10px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    .module-lead {
+      margin: 0 auto 42px;
+      max-width: 880px;
+      text-align: center;
+      color: #4b4b4b;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 24px;
+      line-height: 1.6;
+    }
+
+    .module-lead.light {
+      color: #5a3a24;
+      text-shadow: 0 1px 0 rgba(255, 243, 198, 0.7);
+    }
+
+    .step-carousel {
+      width: 1840px;
+      max-width: calc(100vw - 220px);
+      margin: 0 auto;
+      position: relative;
+      padding-top: 36px;
+    }
+
+    .step-track {
+      min-height: 540px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 58px;
+    }
+
+    .step-card {
+      position: relative;
+      min-height: 514px;
+      text-align: center;
+      transform: scale(0.94);
+      opacity: 0.78;
+      transition: transform 0.28s ease, opacity 0.28s ease;
+    }
+
+    .step-card.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .step-img {
+      width: 100%;
+      aspect-ratio: 1.82 / 1;
+      position: relative;
+      background: #15120e;
+      overflow: hidden;
+    }
+
+    .step-img::after {
+      content: "";
+      display: block;
+      width: calc(100% + 57px);
+      height: calc(100% + 44px);
+      background: url("assets/official/classics-border.png") no-repeat center / 100% 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .step-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(1.04);
+    }
+
+    .step-card h3 {
+      margin: 56px 0 13px;
+      font-size: 42px;
+      line-height: 1.15;
+      color: #050505;
+    }
+
+    .step-card p {
+      margin: 0 auto;
+      width: 90%;
+      color: #4b4b4b;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 22px;
+      line-height: 1.5;
+    }
+
+    .slider-arrow {
+      width: 118px;
+      height: 126px;
+      border: 0;
+      cursor: pointer;
+      background: url("assets/official/mass_prev_l.png") no-repeat 0 0 / 100% 100%;
+      position: absolute;
+      top: 210px;
+      z-index: 4;
+    }
+
+    .slider-prev {
+      left: -72px;
+    }
+
+    .slider-next {
+      right: -72px;
+      transform: rotate(180deg);
+    }
+
+    .account-flow {
+      width: min(1740px, calc(100vw - 220px));
+      margin: 36px auto 0;
+    }
+
+    .account-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 34px;
+      align-items: start;
+    }
+
+    .account-step {
+      min-height: 610px;
+      position: relative;
+      text-align: center;
+    }
+
+    .account-shot {
+      width: 100%;
+      aspect-ratio: 1.5 / 1;
+      position: relative;
+      overflow: hidden;
+      background: #111018;
+      border: 1px solid rgba(85, 54, 22, 0.42);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .account-shot::after {
+      content: "";
+      display: block;
+      width: calc(100% + 42px);
+      height: calc(100% + 34px);
+      background: url("assets/official/classics-border.png") no-repeat center / 100% 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .account-shot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #07111a;
+    }
+
+    .account-step:nth-child(2) .account-shot img,
+    .account-step:nth-child(3) .account-shot img {
+      object-position: center;
+    }
+
+    .account-step h3 {
+      margin: 46px 0 14px;
+      color: #050505;
+      font-size: 40px;
+      line-height: 1.15;
+    }
+
+    .account-step p {
+      width: 90%;
+      margin: 0 auto;
+      color: #4b4b4b;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .account-step-num {
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+      margin-right: 12px;
+      color: #fff7d1;
+      font-family: "SellNum", "FZCang", serif;
+      font-size: 46px;
+      line-height: 64px;
+      text-align: center;
+      vertical-align: middle;
+      background: url("assets/official/vitality_num_zs.png") no-repeat center / 100% 100%;
+    }
+
+    .account-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .account-link-button {
+      display: block;
+      width: 451px;
+      height: 116px;
+      color: #fff;
+      font-size: 42px;
+      line-height: 116px;
+      text-align: center;
+      font-weight: 700;
+      background: url("assets/official/btn_order_now1.png") no-repeat 0 0 / 100% 100%;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .account-link-button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .section-localize {
+      min-height: 1080px;
+      background: url("assets/official/bg3.jpg") no-repeat center top / cover;
+    }
+
+    .localize-flow {
+      width: min(1740px, calc(100vw - 220px));
+      margin: 38px auto 0;
+      padding: 42px 46px 44px;
+      background:
+        linear-gradient(180deg, rgba(39, 23, 16, 0.9), rgba(11, 7, 5, 0.94)),
+        url("assets/official/p3-text-box.png") no-repeat center / 100% 100%;
+      border: 1px solid rgba(228, 176, 85, 0.42);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.46);
+    }
+
+    .localize-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+    }
+
+    .localize-step {
+      min-width: 0;
+    }
+
+    .localize-shot {
+      width: 100%;
+      aspect-ratio: 1.62 / 1;
+      overflow: hidden;
+      background: #090612;
+      border: 1px solid rgba(255, 220, 143, 0.32);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .localize-shot img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .localize-step:nth-child(3) .localize-shot img {
+      object-position: left center;
+    }
+
+    .localize-step h3 {
+      margin: 30px 0 12px;
+      color: #fff2bd;
+      font-size: 34px;
+      line-height: 1.15;
+      text-shadow: 0 3px 0 #52220a, 0 9px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    .localize-step p {
+      margin: 0;
+      color: #dfcea5;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 19px;
+      line-height: 1.62;
+    }
+
+    .localize-num {
+      display: inline-block;
+      width: 58px;
+      height: 58px;
+      margin-right: 10px;
+      color: #fff7d1;
+      font-family: "SellNum", "FZCang", serif;
+      font-size: 42px;
+      line-height: 58px;
+      text-align: center;
+      vertical-align: middle;
+      background: url("assets/official/vitality_num_zs.png") no-repeat center / 100% 100%;
+    }
+
+    .localize-warning {
+      margin-top: 34px;
+      padding: 16px 22px;
+      border-left: 4px solid #ff6c1c;
+      background: rgba(219, 88, 30, 0.18);
+      color: #fff2bd;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 21px;
+      line-height: 1.5;
+    }
+
+    .dark-board {
+      width: min(1540px, calc(100vw - 250px));
+      min-height: 540px;
+      margin: 42px auto 0;
+      padding: 58px 70px 50px;
+      background:
+        linear-gradient(180deg, rgba(39, 23, 16, 0.88), rgba(11, 7, 5, 0.92)),
+        url("assets/official/p3-text-box.png") no-repeat center / 100% 100%;
+      border: 1px solid rgba(228, 176, 85, 0.38);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .dark-board::before {
+      content: "";
+      width: 292px;
+      height: 281px;
+      background: url("assets/official/nostalgic_box.png") no-repeat center / 100%;
+      position: absolute;
+      right: 70px;
+      bottom: 8px;
+      opacity: 0.78;
+      pointer-events: none;
+    }
+
+    .guide-grid {
+      width: calc(100% - 320px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .guide-tile {
+      min-height: 270px;
+      padding: 34px 28px 30px;
+      border: 1px solid rgba(239, 226, 181, 0.28);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.52));
+      color: #ecd59d;
+    }
+
+    .guide-num {
+      display: inline-block;
+      min-width: 76px;
+      height: 76px;
+      margin-bottom: 24px;
+      font-family: "SellNum", serif;
+      font-size: 60px;
+      line-height: 76px;
+      color: #fff2bd;
+      text-align: center;
+      background: url("assets/official/vitality_num_zs.png") no-repeat center / 100% 100%;
+    }
+
+    .guide-tile h3 {
+      margin: 0 0 14px;
+      color: #fff;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+
+    .guide-tile p {
+      margin: 0;
+      color: #d6c6a0;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .board-actions {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      margin-top: 44px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .panel-button {
+      display: block;
+      width: 451px;
+      height: 116px;
+      color: #fff;
+      font-size: 44px;
+      line-height: 116px;
+      text-align: center;
+      font-weight: 700;
+      background: url("assets/official/btn_order_now1.png") no-repeat 0 0 / 100% 100%;
+    }
+
+    .panel-link {
+      color: #efe2b5;
+      font-size: 24px;
+      line-height: 40px;
+      text-decoration: underline;
+    }
+
+    .section-reserve {
+      min-height: 1080px;
+      background: url("assets/official/bg7-w.jpg") no-repeat center top / cover;
+      color: #050505;
+    }
+
+    .reserve-shell {
+      width: min(1700px, calc(100vw - 250px));
+      margin: 24px auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 54px;
+      align-items: start;
+    }
+
+    .reserve-card {
+      min-height: 500px;
+      position: relative;
+    }
+
+    .reserve-visual {
+      width: 100%;
+      aspect-ratio: 1.82 / 1;
+      position: relative;
+      overflow: hidden;
+      background: #18110d;
+    }
+
+    .reserve-visual::after {
+      content: "";
+      width: calc(100% + 39px);
+      height: calc(100% + 30px);
+      background: url("assets/official/platform_banner_mask.png") no-repeat center / 100% 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .reserve-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reserve-card:first-child .reserve-visual img {
+      object-position: left center;
+    }
+
+    .reserve-copy {
+      padding-top: 32px;
+      position: relative;
+    }
+
+    .reserve-copy h3 {
+      margin: 0 0 11px;
+      font-size: 42px;
+      color: #050505;
+      line-height: 1.15;
+    }
+
+    .reserve-copy p {
+      margin: 0;
+      max-width: 520px;
+      color: #535353;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .reserve-main-action {
+      display: flex;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .reserve-main-button {
+      display: block;
+      width: 451px;
+      height: 96px;
+      color: #fff;
+      font-size: 44px;
+      line-height: 96px;
+      text-align: center;
+      font-weight: 700;
+      background: url("assets/official/btn_order_now1.png") no-repeat 0 0 / 100% 100%;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .reserve-main-button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .sr-only {
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+      position: absolute;
+    }
+
+    @media (max-width: 1024px) {
+      body {
+        min-width: 0;
+      }
+
+      .wrapper {
+        margin-top: var(--header-height);
+      }
+
+      .section {
+        min-height: 780px;
+      }
+
+      .part-nav {
+        width: 100%;
+        height: 58px;
+        right: 0;
+        top: auto;
+        bottom: 0;
+        transform: translateY(64px);
+        background: rgba(20, 12, 8, 0.94);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .part-nav.is-visible {
+        transform: translateY(0);
+      }
+
+      .part-nav a {
+        height: 58px;
+        justify-content: center;
+        padding: 0;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .part-nav a.on,
+      .part-nav a:hover {
+        font-size: 15px;
+      }
+
+      .part-nav a::after {
+        top: 0;
+        right: 50%;
+        transform: translateX(50%) rotate(90deg);
+      }
+
+      .section0 {
+        height: 1390px;
+        min-height: 1390px;
+        background-position: 50% top;
+      }
+
+      .bg-parallax-content {
+        transform: scale(0.63);
+        transform-origin: top center;
+        left: 50%;
+        width: 1920px;
+        margin-left: -960px;
+      }
+
+      .lol-logo {
+        width: 178px;
+        height: 84px;
+        top: 28px;
+        left: 22px;
+      }
+
+      .hero-copy {
+        left: 22px;
+        right: 22px;
+        top: 312px;
+        max-width: none;
+      }
+
+      .hero-kicker {
+        font-size: 17px;
+        letter-spacing: 3px;
+      }
+
+      .hero-title {
+        font-size: 54px;
+        line-height: 0.98;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        letter-spacing: 3px;
+      }
+
+      .hero-panel {
+        width: min(92vw, 652px);
+        right: 4vw;
+        left: 4vw;
+        top: 590px;
+        margin: auto;
+      }
+
+      .kv-count-down {
+        display: none;
+      }
+
+      .kv-btns-box {
+        width: 100%;
+        height: auto;
+      }
+
+      .btn-order-now {
+        width: 100%;
+        height: 76px;
+        line-height: 76px;
+        font-size: 31px;
+      }
+
+      .btn-check-dangan {
+        width: 100%;
+        height: 51px;
+        line-height: 51px;
+        font-size: 18px;
+      }
+
+      .dangan-icon {
+        width: 58px;
+        height: 63px;
+      }
+
+      .btn-download {
+        display: none;
+      }
+
+      .pbe-download-detail {
+        width: calc(100% - 28px);
+        min-height: 0;
+        padding: 20px 14px 22px;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        top: 820px;
+        bottom: auto;
+        border-color: rgba(241, 181, 77, 0.36);
+      }
+
+      .pbe-copy h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      .pbe-copy p {
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .pbe-steps {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .pbe-steps li {
+        min-height: auto;
+        padding: 11px 10px;
+        font-size: 15px;
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        align-items: center;
+        text-align: left;
+      }
+
+      .pbe-steps b {
+        margin: 0;
+        font-size: 25px;
+      }
+
+      .path-warning {
+        margin-top: 12px;
+        padding: 10px 12px;
+        font-size: 15px;
+      }
+
+      .pbe-screens {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .pbe-screen-card figcaption {
+        font-size: 12px;
+        margin-top: 7px;
+      }
+
+      .module-inner {
+        padding: 60px 22px 80px;
+      }
+
+      .module-title {
+        font-size: 42px;
+      }
+
+      .module-lead {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      .step-carousel,
+      .dark-board,
+      .reserve-shell {
+        width: 100%;
+        max-width: none;
+      }
+
+      .step-track,
+      .guide-grid,
+      .reserve-shell {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .step-card {
+        min-height: 0;
+      }
+
+      .step-card h3 {
+        margin-top: 34px;
+        font-size: 31px;
+      }
+
+      .step-card p,
+      .reserve-copy p,
+      .guide-tile p {
+        font-size: 16px;
+      }
+
+      .slider-arrow {
+        display: none;
+      }
+
+      .dark-board {
+        padding: 34px 22px 180px;
+      }
+
+      .dark-board::before {
+        right: 50%;
+        transform: translateX(50%);
+        width: 190px;
+        height: 182px;
+      }
+
+      .guide-grid {
+        width: 100%;
+      }
+
+      .guide-tile {
+        min-height: auto;
+      }
+
+      .board-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .panel-button {
+        width: 100%;
+        max-width: 451px;
+        height: 82px;
+        line-height: 82px;
+        font-size: 31px;
+      }
+
+      .reserve-copy h3 {
+        font-size: 31px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <nav class="part-nav" aria-label="模块导航">
+      <a class="on" href="#download"><span>PBE<br>下载安装</span></a>
+      <a href="#account"><span>账号<br>注册</span></a>
+      <a href="#localize"><span>汉化<br>方式</span></a>
+      <a href="#reserve"><span>国服<br>预约</span></a>
+    </nav>
+
+    <section class="section section0 module-anchor" id="download" data-name="PBE下载安装">
+      <div class="bg-parallax-content" aria-hidden="true">
+        <div class="parallax-bg1" data-depth="12"></div>
+        <div class="parallax-bg2" data-depth="18"></div>
+        <div class="parallax-line1" data-depth="24"></div>
+        <div class="parallax-bg3" data-depth="8"></div>
+        <div class="parallax-bg4" data-depth="16"></div>
+        <div class="parallax-bg5" data-depth="28"></div>
+        <div class="parallax-bg6" data-depth="10"></div>
+        <div class="parallax-line2" data-depth="24"></div>
+        <div class="parallax-bg7" data-depth="20"></div>
+        <div class="parallax-line3" data-depth="18"></div>
+        <div class="parallax-line4" data-depth="30"></div>
+        <div class="parallax-mask"></div>
+      </div>
+
+      <a class="lol-logo" href="javascript:;" aria-label="英雄联盟"></a>
+
+      <div class="hero-copy">
+        <div class="hero-kicker">奇游加速</div>
+        <h1 class="hero-title">英雄联盟PBE畅玩<br>保姆级教程</h1>
+        <p class="hero-subtitle">游戏下载 · 汉化支持</p>
+      </div>
+
+      <div class="hero-panel">
+        <div class="kv-count-down" aria-label="当前模块">
+          <p class="count-text1">当前模块</p>
+          <p class="count-text2"><span>01</span></p>
+        </div>
+        <div class="kv-btns-box">
+          <a class="btn-download" href="https://www.qiyou.vip/main/QiyouMobile" target="_blank" rel="noopener">移动端<br>下载</a>
+          <a class="btn-order-now" href="https://www.qiyou.cn/" target="_blank" rel="noopener">下载奇游加速器</a>
+          <a class="btn-check-dangan" href="#pbe-download-detail"><i class="dangan-icon"></i>PC、移动端均支持PBE游戏下载和游戏汉化</a>
+        </div>
+      </div>
+      <div class="pbe-download-detail" id="pbe-download-detail">
+        <div class="pbe-copy">
+          <h2>PBE 下载方式</h2>
+          <p>打开奇游加速器，在搜索框输入“PBE”，进入“英雄联盟 PBE 美测服”页面后，点击右侧游戏工具里的“游戏下载”。</p>
+          <ul class="pbe-steps" aria-label="PBE 下载步骤">
+            <li><b>1</b>搜索“PBE”</li>
+            <li><b>2</b>点击“游戏下载”</li>
+            <li><b>3</b>等待下载完成</li>
+          </ul>
+          <div class="path-warning">注意：游戏安装路径不可以有中文。</div>
+        </div>
+        <div class="pbe-screens" aria-label="PBE 下载截图">
+          <figure class="pbe-screen-card">
+            <div class="pbe-screen-frame">
+              <img src="assets/lol_pbe/qiyou-pbe-search.png" alt="奇游加速器内搜索 PBE 并点击右侧游戏下载">
+            </div>
+            <figcaption>搜索 PBE，右侧选择“游戏下载”。</figcaption>
+          </figure>
+          <figure class="pbe-screen-card">
+            <div class="pbe-screen-frame">
+              <img src="assets/lol_pbe/qiyou-pbe-download-progress.png" alt="PBE 安装包正在下载">
+            </div>
+            <figcaption>下载进度弹窗出现后等待完成。</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="kv-bline" aria-hidden="true"></div>
+    </section>
+
+    <section class="section section-account module-anchor" id="account" data-name="账号注册">
+      <div class="module-inner">
+        <h2 class="module-title">PBE 账号注册</h2>
+        <p class="module-lead">使用奇游加速器加速 PBE 后，进入官方 PBE 页面并按提示创建 Riot 账号。</p>
+
+        <div class="account-flow">
+          <div class="account-steps">
+            <article class="account-step">
+              <div class="account-shot">
+                <img src="assets/lol_pbe/qiyou-pbe-accelerate.png" alt="奇游加速器加速英雄联盟 PBE 美测服">
+              </div>
+              <h3><span class="account-step-num">1</span>注册准备</h3>
+              <p>使用奇游加速器加速【PBE】，保持加速状态后再进入注册页面。</p>
+            </article>
+            <article class="account-step">
+              <div class="account-shot">
+                <img src="assets/lol_pbe/riot-pbe-sign-up.png" alt="League of Legends PBE 页面中的 Sign Up For PBE 按钮">
+              </div>
+              <h3><span class="account-step-num">2</span>进入官网</h3>
+              <p>打开 PBE 官方页面，点击页面中的【Sign Up For PBE】进入注册流程。</p>
+            </article>
+            <article class="account-step">
+              <div class="account-shot">
+                <img src="assets/lol_pbe/riot-pbe-create-one.png" alt="Riot 账号注册窗口中的 Create One 按钮">
+              </div>
+              <h3><span class="account-step-num">3</span>创建账号</h3>
+              <p>选择【Create One】，填写邮箱、账号昵称及密码等信息即可完成创建。</p>
+            </article>
+          </div>
+          <div class="account-actions">
+            <a class="account-link-button" href="https://www.leagueoflegends.com/en-us/pbe/" target="_blank" rel="noopener">前往注册</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-localize module-anchor" id="localize" data-name="汉化方式">
+      <div class="module-inner">
+        <h2 class="module-title light">汉化方式</h2>
+        <p class="module-lead light">使用奇游加速器的一键翻译工具。关闭加速器会同时关闭翻译，下次进游戏前需要重新开启。</p>
+
+        <div class="localize-flow">
+          <div class="localize-steps">
+            <article class="localize-step">
+              <div class="localize-shot">
+                <img src="assets/lol_pbe/qiyou-pbe-one-click-translate.png" alt="奇游加速器 PBE 页面一键翻译按钮">
+              </div>
+              <h3><span class="localize-num">1</span>点击一键翻译</h3>
+              <p>使用奇游加速器加速【PBE】后，在 PBE 页面点击“一键翻译”。</p>
+            </article>
+            <article class="localize-step">
+              <div class="localize-shot">
+                <img src="assets/lol_pbe/qiyou-pbe-translation-toggle.png" alt="开启游戏翻译开关">
+              </div>
+              <h3><span class="localize-num">2</span>开启游戏翻译</h3>
+              <p>在工具中开启“游戏翻译”。关闭加速器将关闭翻译，下次进游戏前请重新开启。</p>
+            </article>
+            <article class="localize-step">
+              <div class="localize-shot">
+                <img src="assets/lol_pbe/riot-client-login-page.png" alt="Riot 客户端账号登录页面">
+              </div>
+              <h3><span class="localize-num">3</span>异常重试</h3>
+              <p>若进入游戏后未正常翻译，请先退回账号登录页面，并关闭客户端后重试以上步骤。</p>
+            </article>
+          </div>
+          <div class="localize-warning">提示：翻译功能依赖奇游加速器状态。每次重新进游戏前，建议确认“一键翻译”和“游戏翻译”均已开启。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-reserve module-anchor" id="reserve" data-name="国服预约">
+      <div class="module-inner">
+        <h2 class="module-title">国服怀旧服预约</h2>
+        <p class="module-lead">国服怀旧服预约已正式开启。预约经典模式，参与好友集结，领取符文页、表情、皮肤与臻彩奖励。</p>
+
+        <div class="reserve-shell">
+          <article class="reserve-card">
+            <div class="reserve-visual"><img src="assets/official/bg1.jpg" alt="预约经典模式上线登录领符文页和表情"></div>
+            <div class="reserve-copy">
+              <h3>预约经典模式</h3>
+              <p>上线登录领符文页和表情。图片使用原活动页素材，还原官方预约奖励氛围。</p>
+            </div>
+          </article>
+          <article class="reserve-card">
+            <div class="reserve-visual"><img src="assets/lol_pbe/classic-friend-recruit-skin.png" alt="好友集结领皮肤和臻彩"></div>
+            <div class="reserve-copy">
+              <h3>好友集结领皮肤</h3>
+              <p>集结好友必得皮肤和臻彩。可作为活动奖励说明入口，后续可继续补充规则。</p>
+            </div>
+          </article>
+        </div>
+        <div class="reserve-main-action">
+          <a class="reserve-main-button" href="https://lol.qq.com/act/a20260712classic/index.html?autoRefreshCookie=1&amp;e_code=508034&amp;exchangeType=1&amp;page=1&amp;qd=true&amp;zmGameId=lol" target="_blank" rel="noopener">立即预约</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const nav = document.querySelector(".part-nav");
+    const navLinks = Array.from(document.querySelectorAll(".part-nav a"));
+    const sections = Array.from(document.querySelectorAll(".module-anchor"));
+    const setActiveNav = () => {
+      const y = window.scrollY + window.innerHeight * 0.38;
+      let active = sections[0];
+      for (const section of sections) {
+        if (section.offsetTop <= y) active = section;
+      }
+      navLinks.forEach((link) => link.classList.toggle("on", link.getAttribute("href") === `#${active.id}`));
+      nav.classList.toggle("is-visible", window.scrollY > 360);
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    window.addEventListener("scroll", setActiveNav, { passive: true });
+    window.addEventListener("resize", setActiveNav);
+    setActiveNav();
+
+    document.querySelector(".section0").addEventListener("pointermove", (event) => {
+      if (window.matchMedia("(max-width: 1024px)").matches) return;
+      const x = (event.clientX / window.innerWidth - 0.5) * 2;
+      const y = (event.clientY / window.innerHeight - 0.5) * 2;
+      document.querySelectorAll("[data-depth]").forEach((layer) => {
+        const depth = Number(layer.dataset.depth);
+        layer.style.transform = `translate3d(${x * depth}px, ${y * depth * 0.45}px, 0)`;
+      });
+    });
+
+    document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+      const cards = Array.from(carousel.querySelectorAll(".step-card"));
+      let index = 0;
+      const render = () => {
+        cards.forEach((card, cardIndex) => card.classList.toggle("active", cardIndex === index));
+      };
+      carousel.querySelector("[data-prev]").addEventListener("click", () => {
+        index = (index + cards.length - 1) % cards.length;
+        render();
+      });
+      carousel.querySelector("[data-next]").addEventListener("click", () => {
+        index = (index + 1) % cards.length;
+        render();
+      });
+      render();
+    });
+
+  </script>
+</body>
+</html>
+
