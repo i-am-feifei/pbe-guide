@@ -1142,8 +1142,13 @@
     }
 
     @media (max-width: 1024px) {
+      html {
+        scroll-padding-bottom: 68px;
+      }
+
       body {
         min-width: 0;
+        overflow-x: hidden;
       }
 
       .wrapper {
@@ -1151,7 +1156,8 @@
       }
 
       .section {
-        min-height: 780px;
+        min-height: auto;
+        overflow: hidden;
       }
 
       .part-nav {
@@ -1190,13 +1196,14 @@
       }
 
       .section0 {
-        height: 1390px;
-        min-height: 1390px;
+        height: auto;
+        min-height: 0;
+        padding-bottom: 44px;
         background-position: 50% top;
       }
 
       .bg-parallax-content {
-        transform: scale(0.63);
+        transform: scale(0.56);
         transform-origin: top center;
         left: 50%;
         width: 1920px;
@@ -1211,32 +1218,44 @@
       }
 
       .hero-copy {
-        left: 22px;
-        right: 22px;
-        top: 312px;
+        left: 18px;
+        right: 18px;
+        top: 255px;
         max-width: none;
       }
 
       .hero-kicker {
-        font-size: 17px;
-        letter-spacing: 3px;
+        gap: 9px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        letter-spacing: 2px;
+      }
+
+      .hero-kicker::before,
+      .hero-kicker::after {
+        width: 10px;
+        height: 10px;
       }
 
       .hero-title {
-        font-size: 54px;
-        line-height: 0.98;
+        max-width: 9em;
+        font-size: clamp(42px, 14vw, 58px);
+        line-height: 0.96;
+        overflow-wrap: normal;
+        word-break: keep-all;
       }
 
       .hero-subtitle {
+        margin-top: 14px;
         font-size: 18px;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
       }
 
       .hero-panel {
-        width: min(92vw, 652px);
-        right: 4vw;
-        left: 4vw;
-        top: 590px;
+        width: calc(100% - 32px);
+        right: 16px;
+        left: 16px;
+        top: 525px;
         margin: auto;
       }
 
@@ -1247,38 +1266,64 @@
       .kv-btns-box {
         width: 100%;
         height: auto;
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 10px;
+        align-items: stretch;
       }
 
       .btn-order-now {
         width: 100%;
-        height: 76px;
-        line-height: 76px;
-        font-size: 31px;
+        height: 72px;
+        margin: 0;
+        grid-column: 2;
+        line-height: 72px;
+        font-size: clamp(24px, 7vw, 31px);
+        letter-spacing: 2px;
       }
 
       .btn-check-dangan {
         width: 100%;
-        height: 51px;
-        line-height: 51px;
-        font-size: 18px;
+        height: auto;
+        min-height: 58px;
+        grid-column: 1 / -1;
+        padding: 9px 12px 9px 56px;
+        line-height: 1.35;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .dangan-icon {
-        width: 58px;
-        height: 63px;
+        width: 54px;
+        height: 58px;
+        left: 0;
+        top: 0;
       }
 
       .btn-download {
-        display: none;
+        width: 88px;
+        height: 72px;
+        padding-top: 27px;
+        position: static;
+        font-size: 17px;
+        line-height: 20px;
+        grid-column: 1;
+        grid-row: 1;
       }
 
       .pbe-download-detail {
         width: calc(100% - 28px);
         min-height: 0;
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 700px auto 0;
         padding: 20px 14px 22px;
         grid-template-columns: 1fr;
         gap: 18px;
-        top: 820px;
         bottom: auto;
         border-color: rgba(241, 181, 77, 0.36);
       }
@@ -1321,8 +1366,8 @@
       }
 
       .pbe-screens {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .pbe-screen-card figcaption {
@@ -1331,16 +1376,80 @@
       }
 
       .module-inner {
-        padding: 60px 22px 80px;
+        padding: 54px 16px 86px;
       }
 
       .module-title {
-        font-size: 42px;
+        font-size: clamp(38px, 11vw, 48px);
+        line-height: 1.05;
       }
 
       .module-lead {
         font-size: 16px;
-        margin-bottom: 30px;
+        line-height: 1.6;
+        margin-bottom: 28px;
+      }
+
+      .account-flow,
+      .localize-flow {
+        width: 100%;
+        margin-top: 22px;
+      }
+
+      .account-steps,
+      .localize-steps {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .account-step,
+      .localize-step {
+        min-height: 0;
+      }
+
+      .account-shot,
+      .localize-shot,
+      .reserve-visual {
+        aspect-ratio: 16 / 9;
+      }
+
+      .account-step h3,
+      .localize-step h3 {
+        margin: 18px 0 8px;
+        font-size: 27px;
+      }
+
+      .account-step p,
+      .localize-step p {
+        font-size: 15px;
+        line-height: 1.58;
+      }
+
+      .account-step-num,
+      .localize-num {
+        width: 42px;
+        height: 42px;
+        margin-right: 8px;
+        font-size: 30px;
+        line-height: 42px;
+      }
+
+      .account-link-button,
+      .reserve-main-button {
+        width: min(100%, 340px);
+        height: 72px;
+        line-height: 72px;
+        font-size: 30px;
+      }
+
+      .localize-flow {
+        padding: 20px 14px 24px;
+      }
+
+      .localize-warning {
+        margin-top: 18px;
+        padding: 13px 14px;
+        font-size: 14px;
       }
 
       .step-carousel,
@@ -1412,6 +1521,19 @@
         font-size: 31px;
       }
 
+      .reserve-card {
+        min-height: 0;
+      }
+
+      .reserve-copy {
+        padding-top: 18px;
+      }
+
+      .reserve-main-action {
+        margin-top: 26px;
+        padding-bottom: 10px;
+      }
+
     }
   </style>
 </head>
@@ -1444,7 +1566,7 @@
 
       <div class="hero-copy">
         <div class="hero-kicker">奇游加速</div>
-        <h1 class="hero-title">英雄联盟PBE畅玩<br>保姆级教程</h1>
+        <h1 class="hero-title">英雄联盟怀旧服<br>提前畅玩</h1>
         <p class="hero-subtitle">游戏下载 · 汉化支持</p>
       </div>
 
